@@ -14,7 +14,7 @@ services:
 
   API_server:
     container_name: API_server
-    image: angelocapossele/asset-registry:latest
+    image: angeloizuc/asset-registry:latest
     ports:
       - "127.0.0.1:7070:80/tcp"
     command: >

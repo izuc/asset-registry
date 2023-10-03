@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/capossele/asset-registry/pkg/registryservice"
+	"github.com/izuc/asset-registry/pkg/registryservice"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"go.mongodb.org/mongo-driver/mongo"

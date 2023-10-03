@@ -3,8 +3,8 @@ package registryservice
 import (
 	"context"
 
-	"github.com/capossele/asset-registry/pkg/registry"
 	"github.com/cockroachdb/errors"
+	"github.com/izuc/asset-registry/pkg/registry"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

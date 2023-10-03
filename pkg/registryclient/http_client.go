@@ -7,8 +7,8 @@ import (
 	"github.com/cockroachdb/errors"
 	"github.com/go-resty/resty/v2"
 
-	"github.com/capossele/asset-registry/pkg/registry"
-	"github.com/capossele/asset-registry/pkg/registry/registryhttp"
+	"github.com/izuc/asset-registry/pkg/registry"
+	"github.com/izuc/asset-registry/pkg/registry/registryhttp"
 )
 
 type HTTPClient struct {

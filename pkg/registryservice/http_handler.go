@@ -5,11 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/capossele/asset-registry/pkg/registry"
-	"github.com/capossele/asset-registry/pkg/registry/registryhttp"
-	"github.com/capossele/swearfilter"
 	"github.com/cockroachdb/errors"
-	"github.com/iotaledger/goshimmer/packages/ledgerstate"
+	"github.com/izuc/asset-registry/pkg/registry"
+	"github.com/izuc/asset-registry/pkg/registry/registryhttp"
 	"github.com/labstack/echo"
 	"go.uber.org/zap"
 )
@@ -27,11 +25,11 @@ type HTTPHandler struct {
 	service registry.Service
 	logger  *zap.SugaredLogger
 
-	filter *swearfilter.SwearFilter
+	filter *SwearFilter
 }
 
 func NewHTTPHandler(service registry.Service, logger *zap.SugaredLogger) *HTTPHandler {
-	return &HTTPHandler{service: service, logger: logger, filter: swearfilter.NewSwearFilter(true, badWords...)}
+	return &HTTPHandler{service: service, logger: logger, filter: NewSwearFilter(true, badWords...)}
 }
 
 func networkAllowed(network string) bool {
@@ -49,11 +47,6 @@ func (h *HTTPHandler) SaveAsset(c echo.Context) error {
 		err = errors.Wrap(err, "failed to parse request body as JSON into an asset")
 		h.logger.Infow("Invalid http request", "error", err)
 		return c.JSON(http.StatusBadRequest, registryhttp.NewErrorResponse(err))
-	}
-
-	_, err := ledgerstate.TransactionIDFromBase58(asset.TransactionID)
-	if err != nil {
-		return c.JSON(http.StatusBadRequest, fmt.Sprintf("invalid TransactionID"))
 	}
 
 	if len(asset.Name) > 20 {
